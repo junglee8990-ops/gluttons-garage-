@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gluttons Garage</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        overflow: hidden;
+        background: #0d0d0d;
+    }
+
+    /* PAGE CONTAINER */
+    .page {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.8s ease;
+    }
+
+    /* FIRST PAGE */
+    #page1 {
+        background: #0d0d0d;
+        z-index: 2;
+    }
+
+    /* SECOND PAGE */
+    #page2 {
+        background: #111;
+        transform: translateX(100%);
+        color: white;
+        font-size: 30px;
+    }
+
+    /* LOGO */
+    .logo {
+        width: 250px;
+        cursor: pointer;
+        z-index: 3;
+        transition: transform 0.3s;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+    }
+
+    /* F1 CAR */
+    .car {
+        position: absolute;
+        width: 120px;
+        left: -150px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 0.8s ease;
+        opacity: 0;
+        z-index: 1;
+    }
+
+    /* ANIMATION STATES */
+    .move-car {
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    .slide-out {
+        transform: translateX(-100%);
+    }
+
+    .slide-in {
+        transform: translateX(0);
+    }
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+    <img src="logo.png" class="logo" id="logo">
+    <img src="https://cdn-icons-png.flaticon.com/512/744/744465.png" class="car" id="car">
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    🚀 Welcome to Gluttons Garage
+</div>
+
+<script>
+    const logo = document.getElementById("logo");
+    const car = document.getElementById("car");
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+
+    logo.addEventListener("click", () => {
+
+        // Show car animation
+        car.classList.add("move-car");
+
+        // After car animation, switch page
+        setTimeout(() => {
+            page1.classList.add("slide-out");
+            page2.classList.add("slide-in");
+        }, 700);
+    });
+</script>
+
+</body>
+</html>
