@@ -17,7 +17,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* PAGE BASE */
+/* PAGE */
 .page {
     width: 100vw;
     height: 100vh;
@@ -48,35 +48,35 @@ body {
 
 /* LOGO */
 .logo {
-    width: 250px;
-    cursor: pointer;
+    width: 260px;
     z-index: 5;
+    cursor: pointer;
 }
 
-/* CAR */
+/* CAR (STARTS BEHIND LOGO) */
 .car {
     position: absolute;
-    width: 120px;
+    width: 140px;
     left: 50%;
-    top: 55%;
-    transform: translate(-50%, -50%) scale(0.5);
+    top: 62%;
+    transform: translate(-50%, -50%);
     opacity: 0;
-    z-index: 4;
+    z-index: 1; /* behind logo */
     transition: all 1s ease;
 }
 
-/* ROAD */
+/* ROAD (STARTS FROM CENTER → RIGHT ONLY) */
 .road {
     position: absolute;
-    bottom: 30%;
-    width: 0%;
+    bottom: 34%;
+    left: 50%;
+    width: 0;
     height: 6px;
-    background: #555;
-    z-index: 3;
+    background: #444;
+    z-index: 2;
     transition: width 1s linear;
 }
 
-/* ROAD DASHES */
 .road::after {
     content: "";
     position: absolute;
@@ -90,10 +90,10 @@ body {
     );
 }
 
-/* ANIMATION STATES */
+/* STATES */
 .show-car {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    z-index: 6; /* comes above logo */
 }
 
 .move-car {
@@ -101,7 +101,7 @@ body {
 }
 
 .expand-road {
-    width: 120%;
+    width: 70vw; /* only right side */
 }
 
 .bg-change {
@@ -123,11 +123,14 @@ body {
 
 <!-- PAGE 1 -->
 <div class="page" id="page1">
+
     <img src="logo.png" class="logo" id="logo">
 
     <div class="road" id="road"></div>
 
-    <img src="https://cdn-icons-png.flaticon.com/512/2972/2972185.png" class="car" id="car">
+    <!-- PROPER RIGHT-FACING CAR -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/F1_car.svg/512px-F1_car.svg.png" class="car" id="car">
+
 </div>
 
 <!-- PAGE 2 -->
@@ -144,28 +147,30 @@ const page2 = document.getElementById("page2");
 
 logo.addEventListener("click", () => {
 
-    // Show car from logo
+    // Step 1: Car appears from behind logo
     car.classList.add("show-car");
 
-    // Road appears
+    // Step 2: Road builds to right
     road.classList.add("expand-road");
 
-    // Background change
+    // Step 3: Background changes
     page1.classList.add("bg-change");
 
-    // Move car to right
+    // Step 4: Car drives RIGHT
     setTimeout(() => {
         car.classList.add("move-car");
-    }, 200);
+    }, 300);
 
-    // Page transition
+    // Step 5: Page switch
     setTimeout(() => {
         page1.classList.add("slide-out");
         page2.classList.add("slide-in");
-    }, 1200);
-
+    }, 1300);
 });
 </script>
 
 </body>
 </html>
+
+
+
